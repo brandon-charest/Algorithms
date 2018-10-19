@@ -1,12 +1,11 @@
 #include "Graph.h"
 
-
-
-Graph::Graph()
+void Graph::addEdge(int const source, int const destination)
 {
-}
-
-
-Graph::~Graph()
-{
+	
+	adj[source].push_back(destination);
+	if (!isDirected)
+	{
+		adj[destination].push_back(source);
+	}
 }
