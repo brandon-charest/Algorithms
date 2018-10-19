@@ -1,6 +1,30 @@
-#include "Graph.h"
+
 #include <queue>
 #include <iostream>
+#include <vector>
+
+struct Graph
+{
+	Graph(int size) : nodes(size)
+	{
+		adj.resize(size);		
+	}
+
+	void addEdge(int const source, int const destination)
+	{
+		adj[source].push_back(destination);
+		if (!isDirected)
+		{
+			adj[destination].push_back(source);
+		}
+	}
+	bool isDirected;
+	std::vector<std::vector<int>> adj;
+	int nodes;
+};
+
+
+
 void BFS(Graph const graph, int vertex)
 {
 	
@@ -25,24 +49,19 @@ void BFS(Graph const graph, int vertex)
 			}
 		}
 	}
-
 }
+
 
 int main()
 {
 
 	Graph graph(10);
 	graph.isDirected = false;
-	graph.addEdge(0, 1);
+	graph.addEdge(1, 0);
 	graph.addEdge(0, 2);
+	graph.addEdge(2, 1);
 	graph.addEdge(0, 3);
-	graph.addEdge(0, 4);
-	graph.addEdge(1, 5);
-	graph.addEdge(2, 5);
-	graph.addEdge(3, 6);
-	graph.addEdge(4, 6);
-	graph.addEdge(5, 7);
-	graph.addEdge(6, 7);
+	graph.addEdge(1, 4);
 
 	BFS(graph, 0);
 
